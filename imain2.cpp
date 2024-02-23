@@ -4,6 +4,7 @@
 #include<string>
 #pragma comment(lib,"Winmm.lib")
 
+
 void drawindo1();
 void drawindo2();
 void drawindo3();
