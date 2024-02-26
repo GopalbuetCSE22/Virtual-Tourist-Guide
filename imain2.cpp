@@ -954,7 +954,7 @@ void iMouse(int button, int state, int mx, int my)
         else if(inbd==1 && mx>=80 && mx<=319 &&my>=155  && my <=216){
             bdbarishalbutton();
         }
-        else if(inbd==1 && mx>=1021 && mx<=1081 &&my>=65 && my <=124){
+        else if(inbd==1 && mx>=945 && mx<=1094 &&my>=33 && my <=129){
             touristbutton();
         }
         else if(outbd==1 && mx>=954 && mx<=1027 &&my>=34 && my <=84){
@@ -1458,11 +1458,6 @@ void iMouse(int button, int state, int mx, int my)
             // fputs("\n",file);
             }
         }
-        // else if (reviewbutton==1 && mx>=135 && mx<=1003 && my>= 265 && my<= 429)
-        // {
-        //     reviewtake=1;
-        // }
-
         else if (reviewbutton == 1 && mx>=499 && mx<=1069 && my>= 240 && my<= 482)
         {
             takereview();
@@ -1479,19 +1474,19 @@ void iMouse(int button, int state, int mx, int my)
         else if(bdctg==1 && mx>=841 && mx<=1135 && my>= 420 && my<= 532){
             mapctg();
         }
-        else if(bdkhulna==1 && mx>=687 && mx<=1021 && my>= 123 && my<= 241){
+        else if(bdkhulna==1 && mx>=799 && mx<=1135 && my>= 412 && my<= 532){
             mapkhulna();
         }
-        else if(bdrajshahi==1 && mx>=676 && mx<=1032 && my>= 118 && my<= 246){
+        else if(bdrajshahi==1 && mx>=789 && mx<=1135 && my>= 420 && my<= 532){
             maprajshahi();
         }
-        else if(bdbarishal==1 && mx>=680 && mx<=1015 && my>= 128 && my<= 236){
+        else if(bdbarishal==1 && mx>=805 && mx<=1135 && my>= 420 && my<= 532){
             mapbarishal();
         }
-        else if(bdshylhet==1 && mx>=672 && mx<=1006 && my>= 101 && my<= 243){
+        else if(bdshylhet==1 && mx>=773 && mx<=1135 && my>= 419 && my<= 532){
             mapsylhet();
         }
-        else if(bdcumilla==1 && mx>=679 && mx<=998 && my>= 121 && my<= 239){
+        else if(bdcumilla==1 && mx>=782 && mx<=1135 && my>= 418 && my<= 532){
             mapcumilla();
         }
         else if (dhakam==1 && mx>=1016 && mx<=1092 && my>= 33 && my<= 90)
@@ -2365,6 +2360,7 @@ void mapsylhet(){
     sylhet1p=0;
     sylhet2p=0;
     sylhet3p=0;
+    sylheth=0;
     // sylhetm=0;
 }
 void mapkhulna(){
@@ -2373,6 +2369,7 @@ void mapkhulna(){
     khulna1p=0;
     khulna2p=0;
     khulna3p=0;
+    khulnah=0;
     // khulnam=0;
 }
 void maprajshahi(){
@@ -2381,6 +2378,7 @@ void maprajshahi(){
     rajshahi1p=0; 
     rajshahi2p=0; 
     rajshahi3p=0;
+    rajshahih=0;
     // rajshahim=0; 
     // start=0;
 }
@@ -2390,6 +2388,7 @@ void mapcumilla(){
     cumilla1p=0;
     cumilla2p=0;
     cumilla3p=0;
+    cumillah=0;
     // cumillam=0;
 }
 void mapbarishal(){
@@ -2397,6 +2396,7 @@ void mapbarishal(){
     bdbarishal=0;
     barishal1p=0;
     barishal2p=0;
+    barishalh=0;
     // barishalm=0;
 }
 
