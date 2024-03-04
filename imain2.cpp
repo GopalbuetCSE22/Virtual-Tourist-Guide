@@ -4,7 +4,7 @@
 #include<string>
 #pragma comment(lib,"Winmm.lib")
 
-
+void drawsign();
 void drawindo1();
 void drawindo2();
 void drawindo3();
@@ -45,6 +45,15 @@ void drawkhulnahotel();
 void drawcumillahotel();
 void drawbarishalhotel();
 
+void drawdhakares();
+void drawctgres();
+void drawrajshahires();
+void drawsylhetres();
+void drawkhulnares();
+void drawbarishalres();
+void drawcumillares();
+
+void signin();
 void touristbutton();
 void settingbutton();
 void about_usbutton();
@@ -172,10 +181,9 @@ void maprajshahi();
 void mapkhulna();
 void mapcumilla();
 void mapbarishal();
-// void inbd_back();
-// void outbd_back();
 
 int start=1;
+int sign=0;
 int login=0;    // should be 0
 int homepage =0;            
 int tourist = 0;
@@ -184,12 +192,19 @@ int about_us = 0;
 int inbd=0;
 int outbd=0;
 int bdDhaka=0;
+int bdDhakaextra=0;
 int bdctg=0;
+int bdctgextra=0;
 int bdrajshahi=0;
+int bdrajshahiextra=0;
 int bdshylhet=0;
+int bdshylhetextra=0;
 int bdkhulna=0;
+int bdkhulnaextra=0;
 int bdcumilla=0;
+int bdcumillaextra=0;
 int bdbarishal=0;
+int bdbarishalextra=0;
 int ctgran=0;
 int ctgban=0;
 int ctgcox=0;
@@ -280,13 +295,16 @@ int cumillah=0;
 int barishalh=0;
 int reviewbutton=0;
 int ureviewbutton=0;
-
+int reviewtake=0;
 
 int logincontrol1=0;
 int logincontrol2=0;
 int flag =0;
 
-int reviewtake=0;
+int signincontrol1=0;
+int signincontrol2=0;
+
+
 
 int dhakam=0;
 int ctgm=0;
@@ -295,6 +313,14 @@ int khulnam=0;
 int cumillam=0;
 int sylhetm=0;
 int barishalm=0;
+
+int dhakar=0;
+int ctgr=0;
+int rajshahir=0;
+int sylhetr=0;
+int cumillar=0;
+int barishalr=0;
+int khulnar=0;
 
 bool playmusic=true;
 int x = 300, y = 300, r = 20;
@@ -323,28 +349,36 @@ int passdex=0;
 char namecheck[100][100];
 char passcheck[100][100];
 
+char str3[100];
+int dex1=0;
+char str4[100];
+int dex2=0;
+
+
+
 void iDraw()
 {
     // place your drawing codes here
     iClear();
     
-    iShowBMP2(0,0,photo[index],0);
-    if (index==109)
-    {
-        start=0;
-        login=1;
-    }
     if (start == 1)
     {
-        // iSetColor(0,0,0);
+        iShowBMP2(0,0,photo[index],0);
+        iSetColor(0,0,0);
         iText(815,60,"Enter space to skip",GLUT_BITMAP_TIMES_ROMAN_24);
     }
     
-
-    if(login==1){
+    if(sign==1){
+        iFilledRectangle(0, 0, 1136, 592);
+        iShowBMP2(0, 0, "photo\\sign_in.bmp", 0);
+        iText(381,402,str3,GLUT_BITMAP_TIMES_ROMAN_24);
+        iText(381,336,str4,GLUT_BITMAP_TIMES_ROMAN_24);
+    }
+    if(login==1 ){
         // drawlogin();
         iFilledRectangle(0, 0, 1136, 592);
         iShowBMP2(0, 0, "photo\\login.bmp", 0);
+        index=0;
         // iSetColor(255,255,255);
     }
     if(login==1){
@@ -359,8 +393,7 @@ void iDraw()
 
     if (homepage == 1)
     {
-        // drawhome();
-    iSetColor(0, 0, 0);
+    // fclose(file);
     iFilledRectangle(0, 0, 1136, 592);
     iShowBMP2(0, 0, "photo\\home.bmp", 0);
     }
@@ -400,9 +433,21 @@ void iDraw()
     else if(bdDhaka==1){
         // drawbddhaka();
     iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\dhakanew.bmp",0);
+    }
+
+    else if (bdDhakaextra==1)
+    {
+        iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\dhak_a.bmp",0);
     }
+    
     else if(bdctg==1){
+        // drawbdctg();
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\ctgextra.bmp",0);
+    }
+    else if(bdctgextra==1){
         // drawbdctg();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\ctg.bmp",0);
@@ -410,9 +455,19 @@ void iDraw()
     else if(bdrajshahi==1){
         // drawbdrajshahi();
     iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\rajshahiextra.bmp",0);
+    }
+    else if(bdrajshahiextra==1){
+        // drawbdrajshahi();
+    iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\rajshahi.bmp",0);
     }
     else if(bdshylhet==1){
+        // drawbdshylhet();
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\sylhetextra.bmp",0);
+    }
+    else if(bdshylhetextra==1){
         // drawbdshylhet();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\sylhet.bmp",0);
@@ -420,14 +475,29 @@ void iDraw()
     else if(bdkhulna==1){
         // drawbdkhulna();
     iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\khulnaextra.bmp",0);
+    }
+    else if(bdkhulnaextra==1){
+        // drawbdkhulna();
+    iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\khulna.bmp",0);
     }
     else if(bdcumilla==1){
         // drawbdcumilla();
     iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\cumillaextra.bmp",0);
+    }
+    else if(bdcumillaextra==1){
+        // drawbdcumilla();
+    iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\cumilla.bmp",0);
     }
     else if(bdbarishal==1){
+        // drawbdbarishal();
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\barishalextra.bmp",0);
+    }
+    else if(bdbarishalextra==1){
         // drawbdbarishal();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\barishal.bmp",0);
@@ -824,6 +894,36 @@ void iDraw()
     {
         drawmaprajshahi();
     }
+    if (dhakar ==1 )
+    {
+        drawdhakares();
+    }
+    if (ctgr ==1 )
+    {
+        drawctgres();
+    }
+    if (rajshahir ==1 )
+    {
+        drawrajshahires();
+    }
+    if (sylhetr ==1 )
+    {
+        drawsylhetres();
+    }
+    if (cumillar==1)
+    {
+        drawcumillares();
+    }
+    if (barishalr==1)
+    {
+        drawbarishalres();
+    }
+    if (khulnar==1)
+    {
+        drawkhulnares();
+    }
+    
+    
 }
 // 	iSetColor(20, 200, 200);
 // 	iFilledCircle(x, y, r);
@@ -854,52 +954,53 @@ FILE* files=fopen("text1.txt","a");
 
 FILE* password =fopen("pass.txt","a");
 
+FILE* file3=fopen("file3.txt","a");
+FILE* file4=fopen("file4.txt","a");
 void iMouse(int button, int state, int mx, int my)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
         // place your codes here
         printf("x = %d, y= %d\n", mx, my);
-        // x += 10;
-        // y += 10;
+        // printf("%d ",index);
 
-
-        // if (start ==1 && mx >= 0 && mx <= 1136 && my >= 0 && my <= 592 )
-        // {
-        //     login=1;
-        //     start=0;
-        //     // homepage=0;
-        // }
-        if (Settings ==1 && mx>=112 && mx<=364 && my >=103 && my<= 196)
-        {
-            Settings=1;
-            playmusic = false;
-            PlaySound(0,0,0);
-        }
-        if (Settings == 1 && mx>=111 && mx<=359 && my >=218 && my<= 303)
-        {
-            if(playmusic == false){
-            PlaySound("photo\\x.wav", NULL, SND_ASYNC | SND_LOOP);
-            }
-        }
         if(login==1 && (mx >= 1006 && mx <= 1124 && my >= 97 && my <= 141) && str[0] != '\0'){
-            Settings=0;about_us=0;tourist=0;
-            login=0;
-            homepage=1;
-            if (file!= NULL)
+            fputs(pass,password);
+            fclose(password);
+        
+            file4 = fopen("file4.txt","r");
+            file3 = fopen("file3.txt","r");
+            str[strlen(str) + 1]='\0';
+            str[strlen(str)]='\n';
+            pass[strlen(pass) + 1]='\0';
+            pass[strlen(pass)]='\n';
+            int flag1=0;
+            while (!feof(file4))
             {
-                fputs(str,file);
-                fclose(file);
+            char str50[20];
+            fgets(str50,45,file4);
+            char str51[20];
+            fgets(str51,45,file3);
+            if (strcmp(str50,pass) == 0 && strcmp(str51,str) == 0)
+            {
+                flag1=1;
             }
+        }
+        if(flag1 ==1){
+        login=0;
+        homepage=1;
+        }
+        }
+        if (login ==1 && (mx >= 859 && mx <= 1111 && my >= 484 && my <= 577) )
+        {
+            signin();
+        }
+        if (sign==1 && (mx >= 982 && mx <= 1083 && my >= 49 && my <= 121))
+        {
+            login=1;
+            sign=0;
         }
         
-        // if(reviewbutton==1 && (mx >= 1006 && mx <= 1124 && my >= 97 && my <= 141) && str1[0] != '\0'){
-        //     if (files!= NULL)
-        //     {
-        //         fputs(str1,files);
-        //         fclose(files);
-        //     }
-        // }
         if (homepage == 1 && mx >= 757 && mx <= 983 && my >= 395 && my <= 478)
         {
             touristbutton();
@@ -912,7 +1013,24 @@ void iMouse(int button, int state, int mx, int my)
         {
             about_usbutton();
         }
-        else if(tourist==1| Settings==1| about_us==1 && (mx>=902 && mx<=1055 && my>=55 && my<=168)){
+        else if(tourist==1 && (mx>=902 && mx<=1055 && my>=55 && my<=168)){
+            backbutton();
+        }
+        else if( Settings==1 && (mx>=902 && mx<=1055 && my>=55 && my<=168)){
+            backbutton();
+        }
+        else if (Settings ==1 && mx>=112 && mx<=364 && my >=103 && my<= 196)
+        {
+            playmusic = false;
+            PlaySound(0,0,0);
+        }
+        else if (Settings == 1 && mx>=111 && mx<=359 && my >=218 && my<= 303)
+        {
+            if(playmusic == false){
+            PlaySound("photo\\x.wav", NULL, SND_ASYNC | SND_LOOP);
+            }
+        }
+        else if(about_us==1 && (mx>=902 && mx<=1055 && my>=55 && my<=168)){
             backbutton();
         }
         else if(bdrajshahi==1| bdbarishal==1| bdshylhet==1|bdcumilla==1|bdkhulna==1 && (mx>=973 && mx<=1068 && my>=25 && my<=77)){
@@ -960,43 +1078,61 @@ void iMouse(int button, int state, int mx, int my)
         else if(outbd==1 && mx>=954 && mx<=1027 &&my>=34 && my <=84){
             touristbutton();
         }
-        else if (bdctg==1 && mx>=88 && mx<=223 && my>=423 && my <= 441)
+        else if(bdctg==1 && mx>=526 && mx<=702 && my>= 321 && my<=481){
+            bdctg=0;
+            bdctgextra=1;
+        }
+        else if (bdctgextra==1 && mx>=88 && mx<=223 && my>=423 && my <= 441)
         {
             ctgranga();
         }
-        else if (bdctg==1 && mx>=84 && mx<=221 && my>=332 && my <= 354)
+        else if (bdctgextra==1 && mx>=84 && mx<=221 && my>=332 && my <= 354)
         {
             ctgbandar();
         }
-        else if (bdctg==1 && mx>=88 && mx<=223 && my>=250 && my <= 268)
+        else if (bdctgextra==1 && mx>=88 && mx<=223 && my>=250 && my <= 268)
         {
             ctgcoxs();
         }
-        else if (bdctg==1 && mx>=88 && mx<=151 && my>=162 && my <= 185)
+        else if (bdctgextra==1 && mx>=88 && mx<=151 && my>=162 && my <= 185)
         {
             ctgsaj();
         }
         else if (ctgran ==1 | ctgban ==1 | ctgcox==1 | ctgsajek ==1 && (mx>=1039 && mx<= 1113 && my>=20 && my<=91))
         {
-            bdctg=1;
+            bdctgextra=1;
             ctgran =0, ctgban =0, ctgcox=0, ctgsajek =0;
         }
-        else if (bdDhaka==1 && mx>=57 && mx<=302 && my>= 422 && my<=524)
+        else if (bdctgextra==1 && mx>=947 && mx<=1115 && my>= 18 && my<=167)
+        {
+            bdctgextra=0;
+            bdctg=1;
+        }
+        else if(bdDhaka==1 && mx>=526 && mx<=702 && my>= 321 && my<=481){
+            bdDhaka=0;
+            bdDhakaextra=1;
+        }
+        else if (bdDhakaextra==1 && mx>=57 && mx<=302 && my>= 422 && my<=524)
         {
             dhakaahad();
         }
-        else if (bdDhaka==1 && mx>=409 && mx<=650 && my>= 423 && my<=522)
+        else if (bdDhakaextra==1 && mx>=409 && mx<=650 && my>= 423 && my<=522)
         {
             dhakalald();
         }
-        else if (bdDhaka==1 && mx>=805 && mx<=1050 && my>= 423 && my<=522)
+        else if (bdDhakaextra==1 && mx>=805 && mx<=1050 && my>= 423 && my<=522)
         {
             dhakasonad();
         }
         else if (dhakaaha==1 | dhakalal==1 | dhakasona ==1 && (mx>=1039 && mx<= 1113 && my>=20 && my<=91))
         {
-            bdDhaka=1;
+            bdDhakaextra=1;
             dhakaaha=0, dhakalal=0,dhakasona =0;
+        }
+        else if (bdDhakaextra==1 && mx>=1024 && mx<=1132 && my>= 28 && my<=119)
+        {
+            bdDhakaextra=0;
+            bdDhaka=1;
         }
         else if (outbd == 1 && mx>=643 && mx<=918 && my>= 426 && my<=500)
         {
@@ -1080,11 +1216,6 @@ void iMouse(int button, int state, int mx, int my)
         {
            usa4();
         }
-        else if (((usa1p== 1) | usa2p ==1 | usa3p == 1| usa4p ==1)&& mx>=1019 && mx<=1085 && my>= 40 && my<=83 )
-        {
-           usaa=1;
-           usa1p =0, usa2p =0, usa3p =0,usa4p ==0;
-        }
         else if (russiaa==1 && mx>=434 && mx<=821 && my>= 504 && my<=550 )
         {
             russia1();
@@ -1100,11 +1231,6 @@ void iMouse(int button, int state, int mx, int my)
         else if (russiaa==1 && mx>=433 && mx<=1059 && my>= 185 && my<=235 )
         {
             russia4();
-        }
-        else if (((russia1p== 1) | russia2p ==1 | russia3p == 1| russia4p ==1)&& mx>=1019 && mx<=1085 && my>= 40 && my<=83 )
-        {
-           russiaa=1;
-           russia1p =0;russia2p =0;russia3p =0;russia4p =0;
         }
         else if ((francea ==1) &&  mx>=439 && mx<=623 && my>= 497 && my<=515)
         {
@@ -1122,11 +1248,11 @@ void iMouse(int button, int state, int mx, int my)
         {
             france4();
         }
-        else if (((france2p== 1) | france1p ==1 | france3p == 1| france4p ==1)&& mx>=1019 && mx<=1126 && my>= 10 && my<=83 )
-        {
-           francea=1;
-           france1p=0;france2p=0;france3p=0;france4p=0;
-        }
+        // else if (((france2p== 1) | france1p ==1 | france3p == 1| france4p ==1)&& mx>=1019 && mx<=1126 && my>= 10 && my<=83 )
+        // {
+        //    francea=1;
+        //    france1p=0;france2p=0;france3p=0;france4p=0;
+        // }
         else if ((australiaa==1) &&  mx>=437 && mx<=974 && my>= 500 && my<=536)
         {
             aus1();
@@ -1142,6 +1268,21 @@ void iMouse(int button, int state, int mx, int my)
         else if ((australiaa==1) &&  mx>=437 && mx<=851 && my>= 228 && my<=266)
         {
             aus4();
+        }
+        else if (((usa1p== 1) | usa2p ==1 | usa3p == 1| usa4p ==1) && mx>=1019 && mx<=1085 && my>= 40 && my<=83 )
+        {
+           usaa=1;
+           usa1p =0; usa2p =0; usa3p =0;usa4p =0;
+        }
+        else if (((russia1p== 1) | russia2p ==1 | russia3p == 1| russia4p ==1)&& mx>=1019 && mx<=1085 && my>= 40 && my<=83 )
+        {
+           russiaa=1;
+           russia1p =0;russia2p =0;russia3p =0;russia4p =0;
+        }
+        else if (((france2p== 1) | france1p ==1 | france3p == 1| france4p ==1)&& mx>=1019 && mx<=1126 && my>= 10 && my<=83 )
+        {
+           francea=1;
+           france1p=0;france2p=0;france3p=0;france4p=0;
         }
         else if (((aus1p== 1) | aus2p ==1 | aus3p == 1| aus4p ==1)&& mx>=1019 && mx<=1126 && my>= 10 && my<=83)
         {
@@ -1281,95 +1422,145 @@ void iMouse(int button, int state, int mx, int my)
            maldiv=1;
            maldiph=0;
         }
-        else if (bdrajshahi==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
+        else if(bdrajshahi==1 && mx>=526 && mx<=702 && my>= 321 && my<=481){
+            bdrajshahi=0;
+            bdrajshahiextra=1;
+        }
+        else if (bdrajshahiextra==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
         {
             rajshahi1();
         }
-        else if (bdrajshahi==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
+        else if (bdrajshahiextra==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
         {
             rajshahi2();
         }
-        else if (bdrajshahi==1 && mx>=41 && mx<=609 && my>= 77 && my<=170 )
+        else if (bdrajshahiextra==1 && mx>=41 && mx<=609 && my>= 77 && my<=170 )
         {
             rajshahi3();
         }
-        else if (bdshylhet==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
+        else if (bdrajshahiextra==1 && mx>=947 && mx<=1115 && my>= 18 && my<=167)
+        {
+            bdrajshahiextra=0;
+            bdrajshahi=1;
+        }
+        else if(bdshylhet==1 && mx>=526 && mx<=702 && my>= 321 && my<=481){
+            bdshylhet=0;
+            bdshylhetextra=1;
+        }
+         else if (bdshylhetextra==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
         {
             sylhet1();
         }
-        else if (bdshylhet==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
+        else if (bdshylhetextra==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
         {
             sylhet2();
         }
-        else if (bdshylhet==1 && mx>=41 && mx<=609 && my>= 77 && my<=170 )
+        else if (bdshylhetextra==1 && mx>=41 && mx<=609 && my>= 77 && my<=170 )
         {
             sylhet3();
         }
-
-        else if (bdcumilla==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
+        else if (bdshylhetextra==1 && mx>=947 && mx<=1115 && my>= 18 && my<=167)
+        {
+            bdshylhetextra=0;
+            bdshylhet=1;
+        }
+        else if(bdcumilla==1 && mx>=526 && mx<=702 && my>= 321 && my<=481){
+            bdcumilla=0;
+            bdcumillaextra=1;
+        }
+        else if (bdcumillaextra==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
         {
             cumilla1();
         }
-        else if (bdcumilla==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
+        else if (bdcumillaextra==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
         {
             cumilla2();
         }
-        else if (bdcumilla==1 && mx>=41 && mx<=609 && my>= 77 && my<=170 )
+        else if (bdcumillaextra==1 && mx>=41 && mx<=609 && my>= 77 && my<=170 )
         {
             cumilla3();
         }
-
-        else if (bdkhulna==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
+        else if (bdcumillaextra==1 && mx>=947 && mx<=1115 && my>= 18 && my<=167)
+        {
+            bdcumillaextra=0;
+            bdcumilla=1;
+        }
+        else if(bdkhulna==1 && mx>=526 && mx<=702 && my>= 321 && my<=481){
+            bdkhulna=0;
+            bdkhulnaextra=1;
+        }
+        else if (bdkhulnaextra==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
         {
             khulna1();
         }
-        else if (bdkhulna==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
+        else if (bdkhulnaextra==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
         {
             khulna2();
         }
-        else if (bdkhulna==1 && mx>=41 && mx<=609 && my>= 77 && my<=170 )
+        else if (bdkhulnaextra==1 && mx>=41 && mx<=609 && my>= 77 && my<=170 )
         {
             khulna3();
         }
-
-        else if (bdbarishal==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
+        else if (bdkhulnaextra==1 && mx>=947 && mx<=1115 && my>= 18 && my<=167)
+        {
+            bdkhulnaextra=0;
+            bdkhulna=1;
+        }
+        else if(bdbarishal==1 && mx>=526 && mx<=702 && my>= 321 && my<=481){
+            bdbarishal=0;
+            bdbarishalextra=1;
+        }
+        else if (bdbarishalextra==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
         {
             barishal1();
         }
-        else if (bdbarishal==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
+        else if (bdbarishalextra==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
         {
             barishal2();
         }
-        else if (((rajshahi1p== 1) |  rajshahi2p==1 | rajshahi3p == 1)&& mx>=1044 && mx<=1132 && my>= 7 && my<=84 )
+        else if (bdbarishalextra==1 && mx>=947 && mx<=1115 && my>= 18 && my<=167)
         {
-           bdrajshahi=1;
+            bdbarishalextra=0;
+            bdbarishal=1;
+        }
+        // else if (bdbarishal==1 && mx>=41 && mx<=609 && my>= 390 && my<=490 )
+        // {
+        //     barishal1();
+        // }
+        // else if (bdbarishal==1 && mx>=41 && mx<=609 && my>= 244 && my<=339 )
+        // {
+        //     barishal2();
+        // }
+        else if (((rajshahi1p== 1) |  rajshahi2p==1 | rajshahi3p == 1)&& (mx>=1044 && mx<=1132 && my>= 7 && my<=84) )
+        {
+           bdrajshahiextra=1;
            rajshahi1p=0;rajshahi2p=0;rajshahi3p=0;
         }
-        else if (((sylhet1p== 1) |  sylhet2p==1 | sylhet3p == 1)&& mx>=1044 && mx<=1132 && my>= 7 && my<=84 )
+        else if (((sylhet1p== 1) |  sylhet2p==1 | sylhet3p == 1)&& (mx>=1044 && mx<=1132 && my>= 7 && my<=84) )
         {
-           bdshylhet=1;
+           bdshylhetextra=1;
            sylhet1p=0;sylhet2p=0;sylhet3p=0;
         }
-        else if (((khulna1p== 1) |  khulna2p==1 | khulna3p == 1)&& mx>=1044 && mx<=1132 && my>= 7 && my<=84 )
+        else if (((khulna1p== 1) |  khulna2p==1 | khulna3p == 1)&& (mx>=1044 && mx<=1132 && my>= 7 && my<=84) )
         {
-           bdkhulna=1;
+           bdkhulnaextra=1;
            khulna1p=0;khulna2p=0;khulna3p=0;
         }
-        else if (((cumilla1p== 1) |  cumilla2p==1 | cumilla3p == 1)&& mx>=1044 && mx<=1132 && my>= 7 && my<=84 )
+        else if (((cumilla1p== 1) |  cumilla2p==1 | cumilla3p == 1)&& (mx>=1044 && mx<=1132 && my>= 7 && my<=84) )
         {
-           bdcumilla=1;
+           bdcumillaextra=1;
            cumilla1p=0;cumilla2p=0;cumilla3p=0;
         }
-        else if (((barishal1p== 1) |  barishal2p==1)&& mx>=1044 && mx<=1132 && my>= 7 && my<=84 )
+        else if (((barishal1p== 1) |  barishal2p==1)&& (mx>=1044 && mx<=1132 && my>= 7 && my<=84 ))
         {
-           bdbarishal=1;
+           bdbarishalextra=1;
            barishal1p=0;barishal2p=0;
         }
-        else if (bdDhaka ==1 && mx>=60 && mx<=496 && my>= 188 && my<=310)
+        else if (bdDhaka ==1 && mx>=798 && mx<=977 && my>= 319 && my<=482)
         {
             dhakahotel();
         }
-        else if (bdctg ==1 && mx>=461 && mx<=896 && my>= 54 && my<=172)
+        else if (bdctg ==1 && mx>=798 && mx<=977 && my>= 319 && my<=482)
         {
             ctghotel();
         }
@@ -1393,22 +1584,22 @@ void iMouse(int button, int state, int mx, int my)
         {
             barishalhotel();
         }
-        else if (dhakah==1 && mx>=1001 && mx<=1109 && my>= 19 && my<=87 )
+        else if (dhakah==1 && mx>=1013 && mx<=1120 && my>= 26 && my<=119 )
         {
             dhakah=0;
             bdDhaka=1;
         }
-        else if (ctgh==1 && mx>=1001 && mx<=1109 && my>= 19 && my<=87 )
+        else if (ctgh==1 && mx>=1013 && mx<=1120 && my>= 26 && my<=119 )
         {
             ctgh=0;
             bdctg=1;
         }
-        else if (rajshahih==1 && mx>=1001 && mx<=1109 && my>= 19 && my<=87 )
+        else if (rajshahih==1 && mx>=1013 && mx<=1120 && my>= 26 && my<=119 )
         {
             rajshahih=0;
             bdrajshahi=1;
         }
-        else if (sylheth==1 && mx>=1001 && mx<=1109 && my>= 19 && my<=87 )
+        else if (sylheth==1 && mx>=1013 && mx<=1120 && my>= 26 && my<=119 )
         {
             sylheth=0;
             bdshylhet=1;
@@ -1428,18 +1619,20 @@ void iMouse(int button, int state, int mx, int my)
             barishalh=0;
             bdbarishal=1;
         }
-        else if(homepage==1 && mx>=880 && mx<=1116 && my>= 518 && my<=583 ){
+        else if(homepage==1 && mx>=880 && mx<=1116 && my>= 518 && my<=583){
             review();
         }
-        else if(reviewbutton == 1 && mx>=990 && mx<=1078 && my>= 39 && my<=94){
+        else if(reviewbutton == 1 && mx>=857 && mx<=1130 && my>= 497 && my<=580){
             reviewbutton=0;
             homepage=1;
+            tourist=0;
+            Settings=0;
         }
-        else if (reviewbutton==1 && mx>=140 && mx<=444 && my>= 38 && my<=131)
+        else if (reviewbutton ==1 && mx>=140 && mx<=444 && my>= 38 && my<=131)
         {
             ureview();
         }
-        else if (ureviewbutton ==1 && mx>=984 && mx<=1085 && my>= 36 && my<=93)
+        else if (ureviewbutton == 1 && mx>=879 && mx<=1130 && my>= 488 && my<=576)
         {
             ureviewbutton=0;
             reviewbutton=1;
@@ -1454,41 +1647,47 @@ void iMouse(int button, int state, int mx, int my)
             logincontrol1=0;
             logincontrol2=1;
             if(flag == 0){
-            fputs(str,file);
+            // fputs(str,file);
+            fprintf(file,"%s\n",str);
+            fclose(file);
             // fputs("\n",file);
             }
         }
         else if (reviewbutton == 1 && mx>=499 && mx<=1069 && my>= 240 && my<= 482)
         {
-            takereview();
+            // takereview();
+            reviewtake = 1;
+            reviewbutton = 0;
+            ureviewbutton=0;
         }
-        else if (reviewtake == 1 && mx>=1003 && mx<=1091 && my>= 26 && my<= 90)
+        else if (reviewtake == 1 && mx>=879 && mx<=1130 && my>= 488 && my<= 576)
         {
             reviewbutton =1;
             reviewtake = 0;
+            ureviewbutton=0;
         }
-
-        else if(bdDhaka==1 && mx>=85 && mx<=402 && my>= 24 && my<= 157){
+        else if(bdDhaka==1 && mx>=527 && mx<=703 && my>= 104 && my<= 262){
             mapdhaka();
         }
-        else if(bdctg==1 && mx>=841 && mx<=1135 && my>= 420 && my<= 532){
+        else if(bdctg==1 && mx>=527 && mx<=703 && my>= 104 && my<= 262){
             mapctg();
         }
-        else if(bdkhulna==1 && mx>=799 && mx<=1135 && my>= 412 && my<= 532){
+        else if(bdkhulna==1 && mx>=527 && mx<=703 && my>= 104 && my<= 262){
             mapkhulna();
         }
-        else if(bdrajshahi==1 && mx>=789 && mx<=1135 && my>= 420 && my<= 532){
+        else if(bdrajshahi==1 && mx>=527 && mx<=703 && my>= 104 && my<= 262){
             maprajshahi();
         }
-        else if(bdbarishal==1 && mx>=805 && mx<=1135 && my>= 420 && my<= 532){
+        else if(bdbarishal==1 && mx>=527 && mx<=703 && my>= 104 && my<= 262){
             mapbarishal();
         }
-        else if(bdshylhet==1 && mx>=773 && mx<=1135 && my>= 419 && my<= 532){
+        else if(bdshylhet==1 && mx>=527 && mx<=703 && my>= 104 && my<= 262){
             mapsylhet();
         }
-        else if(bdcumilla==1 && mx>=782 && mx<=1135 && my>= 418 && my<= 532){
+        else if(bdcumilla==1 && mx>=527 && mx<=703 && my>= 104 && my<= 262){
             mapcumilla();
         }
+
         else if (dhakam==1 && mx>=1016 && mx<=1092 && my>= 33 && my<= 90)
         {
             dhakam=0;
@@ -1524,19 +1723,87 @@ void iMouse(int button, int state, int mx, int my)
             rajshahim=0;
             bdrajshahi=1; 
         }
-        
+        else if(sign == 1 && (mx >=347  && mx <= 781 && my >= 381 && my <= 431)){
+            signincontrol1=1;
+            signincontrol2=0;
+        }
+        else if(sign == 1 && (mx >=348  && mx <= 783 && my >= 314 && my <= 364)){
+            signincontrol2=1;
+            signincontrol1=0;
+        }
+        else if(sign == 1 && (mx >=351  && mx <= 785 && my >= 186 && my <= 245)){
+            fprintf(file4,"%s\n",str4);
+            fprintf(file3,"%s\n",str3);
+            fclose(file3);
+            fclose(file4);
+            sign=0;
+            login=1;
+        }
+        else if(bdDhaka == 1 && (mx >=796  && mx <= 977 && my >= 103 && my <= 263)){
+            bdDhaka=0;
+            dhakar=1;
+        }
+        else if(bdctg == 1 && (mx >=796  && mx <= 977 && my >= 103 && my <= 263)){
+            bdctg=0;
+            ctgr=1;
+        }
+        else if(bdrajshahi == 1 && (mx >=796  && mx <= 977 && my >= 103 && my <= 263)){
+            bdrajshahi=0;
+            rajshahir=1;
+        }
+        else if(bdshylhet == 1 && (mx >=796  && mx <= 977 && my >= 103 && my <= 263)){
+            bdshylhet=0;
+            sylhetr=1;
+        }
+        else if(bdcumilla == 1 && (mx >=796  && mx <= 977 && my >= 103 && my <= 263)){
+            bdcumilla=0;
+            cumillar=1;
+        }
+        else if(bdbarishal == 1 && (mx >=796  && mx <= 977 && my >= 103 && my <= 263)){
+            bdbarishal=0;
+            barishalr=1;
+        }
+        else if(bdkhulna == 1 && (mx >=796  && mx <= 977 && my >= 103 && my <= 263)){
+            bdkhulna=0;
+            khulnar=1;
+        }
 
-        // else if (Settings==1 && mx>=0 && mx<=1136 && my>= 0 && my<=592 )
-        // {
-        //     europee=0;
-        // }
+        else if (dhakar == 1 && (mx >=994  && mx <= 1119 && my >= 35 && my <= 115))
+        {
+            dhakar=0;
+            bdDhaka=1;
+        }
+        else if (ctgr == 1 && (mx >=994  && mx <= 1119 && my >= 35 && my <= 115))
+        {
+            ctgr=0;
+            bdctg=1;
+        }
+        else if (sylhetr == 1 && (mx >=994  && mx <= 1119 && my >= 35 && my <= 115))
+        {
+            sylhetr=0;
+            bdshylhet=1;
+        }
+        else if (rajshahir == 1 && (mx >=994  && mx <= 1119 && my >= 35 && my <= 115))
+        {
+            rajshahir=0;
+            bdrajshahi=1;
+        }
+        else if (khulnar == 1 && (mx >=994  && mx <= 1119 && my >= 35 && my <= 115))
+        {
+            khulnar=0;
+            bdkhulna=1;
+        }
+        else if (barishalr == 1 && (mx >=994  && mx <= 1119 && my >= 35 && my <= 115))
+        {
+            barishalr=0;
+            bdbarishal=1;
+        }
+        else if (cumillar == 1 && (mx >=994  && mx <= 1119 && my >= 35 && my <= 115))
+        {
+            cumillar=0;
+            bdcumilla=1;
+        }
     }
-    // if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    // {
-    //     // place your codes here
-    //     x -= 10;
-    //     y -= 10;
-    // }
 }
 
 /*
@@ -1549,7 +1816,50 @@ void iKeyboard(unsigned char key)
     {
         login=1;
         start = 0;
-        // iSetColor(0,0,0);
+    }
+    
+    if(sign==1 && signincontrol1==1){
+    if (key != '\b' && key != '\r')
+    {
+        str3[dex1]=key;
+        dex1++;
+        str3[dex1]='\0';
+    }
+    else if(key == '\r'){
+        fprintf(file3,"%s\n",str3);
+    }
+    else if(key=='\b'){
+        if (dex1<=0)
+        {
+            dex1=0;
+        }
+        else{
+        dex1--;
+        }
+        str3[dex1]='\0';
+    }
+    }
+
+    if(sign==1 && signincontrol2==1){
+    if (key != '\b' && key != '\r')
+    {
+        str4[dex2]=key;
+        dex2++;
+        str4[dex2]='\0';
+    }
+    else if(key == '\r'){
+        fprintf(file4,"%s\n",str4);
+    }
+    else if(key=='\b'){
+        if (dex2<=0)
+        {
+            dex2=0;
+        }
+        else{
+        dex2--;
+        }
+        str4[dex2]='\0';
+    }
     }
     
     if(login==1 && logincontrol1 == 1){
@@ -1560,11 +1870,8 @@ void iKeyboard(unsigned char key)
         str[textdex]='\0';
     }
     else if(key == '\r'){
-        fputs(str,file);
-        // fputs("\n",file);
+        fprintf(file,"%s\n",str);
         flag =1;
-        // login=0;
-        // homepage=1;
     }
     else if(key=='\b'){
         if (textdex<=0)
@@ -1587,44 +1894,30 @@ void iKeyboard(unsigned char key)
     }
     else if(key == '\r'){
         fputs(pass,password);
-        // fputs("\n",password);
-        // int i=0;
-        // while(!feof(file)){
-        //     fscanf(file,"%s",namecheck[i]);
-        //     i++;
-        // }
-        // namecheck[i][0]='\0';   
-        // int j=0;
-        // while(!feof(password)){
-        //     fscanf(password,"%s",passcheck[j]);
-        //     j++;
-        // }
-        // passcheck[j][0]='\0';
-        
-        // int ncheck=0, pcheckindex=-1;
-        // for (int k = 0; k < i; k++)
-        // {
-        //     if (str == namecheck[i])
-        //     {
-        //         ncheck=1;
-        //         pcheckindex=i;
-        //     }
-        // }
-        // if(ncheck==1 && (passcheck[pcheckindex]==pass)){
-        //     login=0;
-        //     homepage=1;
-        // }
-        // int pchechk=0;
-        // for (int k = 0; k < j; k++)
-        // {
-        //     if (pass == passcheck[i])
-        //     {
-        //         pchechk=1;
-        //     }
-        // }
-        
+        fclose(password);
+
+        file4 = fopen("file4.txt","r");
+        file3 = fopen("file3.txt","r");
+        str[strlen(str) + 1]='\0';
+        str[strlen(str)]='\n';
+        pass[strlen(pass) + 1]='\0';
+        pass[strlen(pass)]='\n';
+        int flag1=0;
+        while (!feof(file4))
+        {
+        char str50[20];
+        fgets(str50,45,file4);
+        char str51[20];
+        fgets(str51,45,file3);
+        if (strcmp(str50,pass) == 0 && strcmp(str51,str) == 0)
+        {
+            flag1=1;
+        }
+        }
+        if(flag1 ==1){
         login=0;
         homepage=1;
+        }
     }
     else if(key=='\b'){
         if (passdex<=0)
@@ -1650,14 +1943,9 @@ void iKeyboard(unsigned char key)
     else if(key == '\r')
     {
         txtdex=0;
-        // fputs("\n",files);
-        // fputs(str1,files);
         fprintf(files,str1);
         fprintf(files,"\n");
-        // fputs("\n",files);
-        // fputc('\n',files);
         fclose(files);
-        // strcpy(reviewstr[4],str1);
         reviewbutton = 1;
         reviewtake = 0;
         ureviewbutton=0;
@@ -1740,10 +2028,10 @@ void backbutton(){
 }
 void review(){
     reviewbutton=1;
+    tourist = 0;
     homepage=0;
     about_us = 0;
     Settings = 0;
-    tourist = 0;
 }
 void backinbdbutton(){
     inbd=1;
@@ -1763,6 +2051,7 @@ void inbdbutton(){
     about_us = 0;
     Settings = 0;
     tourist = 0;
+    reviewbutton=0;
 }
 void outbdbutton(){
     outbd=1;
@@ -1771,6 +2060,7 @@ void outbdbutton(){
     about_us = 0;
     Settings = 0;
     tourist = 0;
+    reviewbutton=0;
 }
 void bdDhakabutton(){
     bdDhaka=1;
@@ -1833,7 +2123,8 @@ void ctgranga(){
     ctgsajek=0;
     ctgcox=0;
     ctgban=0;
-    bdctg=0;ctgran=1;
+    // bdctg=0;
+    bdctgextra=0;
     ctgsajek=0;
     ctgcox=0;
     ctgban=0;
@@ -1843,39 +2134,40 @@ void ctgbandar(){
     ctgsajek=0;
     ctgcox=0;
     ctgban=1;
-    bdctg=0;
+    bdctgextra=0;
 }
 void ctgcoxs(){
     ctgran=0;
     ctgsajek=0;
     ctgcox=1;
     ctgban=0;
-    bdctg=0;
+    bdctgextra=0;
 }
 void ctgsaj(){
     ctgran=0;
     ctgsajek=1;
     ctgcox=0;
     ctgban=0;
-    bdctg=0;
+    bdctgextra=0;
 }
 void dhakaahad(){
     dhakaaha=1;
     dhakalal=0;
     dhakasona=0;
-    bdDhaka=0;
+    // bdDhaka=0;
+    bdDhakaextra=0;
 }
 void dhakalald(){
     dhakaaha=0;
     dhakalal=1;
     dhakasona=0;
-    bdDhaka=0;
+    bdDhakaextra=0;
 }
 void dhakasonad(){
     dhakaaha=0;
     dhakalal=0;
     dhakasona=1;
-    bdDhaka=0;
+    bdDhakaextra=0;
 }
 void europe(){
     europee=1;
@@ -2204,21 +2496,22 @@ void rajshahi1(){
     rajshahi1p=1;
     rajshahi2p=0;
     rajshahi3p=0;
-    bdrajshahi=0;
+    // bdrajshahi=0;
+    bdrajshahiextra=0;
     // rajshahih=0;
 }
 void rajshahi2(){
     rajshahi1p=0;
     rajshahi2p=1;
     rajshahi3p=0;
-    bdrajshahi=0;
+    bdrajshahiextra=0;
     // rajshahih=0;
 }
 void rajshahi3(){
     rajshahi1p=0;
     rajshahi2p=0;
     rajshahi3p=1;
-    bdrajshahi=0;
+    bdrajshahiextra=0;
     // rajshahih=0;
 }
 
@@ -2226,21 +2519,22 @@ void sylhet1(){
     sylhet1p=1;
     sylhet2p=0;
     sylhet3p=0;
-    bdshylhet=0;
+    // bdshylhet=0;
+    bdshylhetextra=0;
     // sylheth=0;
 }
 void sylhet2(){
     sylhet1p=0;
     sylhet2p=1;
     sylhet3p=0;
-    bdshylhet=0;
+    bdshylhetextra=0;
     // sylheth=0;
 }
 void sylhet3(){
     sylhet1p=0;
     sylhet2p=0;
     sylhet3p=1;
-    bdshylhet=0;
+    bdshylhetextra=0;
     // sylheth=0;
 }
 
@@ -2248,54 +2542,57 @@ void khulna1(){
     khulna1p=1;
     khulna2p=0;
     khulna3p=0;
-    bdkhulna=0;
+    // bdkhulna=0;
+    bdkhulnaextra=0;
     // khulnah=0;
 }
 void khulna2(){
     khulna1p=0;
     khulna2p=1;
     khulna3p=0;
-    bdkhulna=0;
+    bdkhulnaextra=0;
     // khulnah=0;
 }
 void khulna3(){
     khulna1p=0;
     khulna2p=0;
     khulna3p=1;
-    bdkhulna=0;
+    bdkhulnaextra=0;
     // khulnah=0;
 }
 void cumilla1(){
     cumilla1p=1;
     cumilla2p=0;
     cumilla3p=0;
-    bdcumilla=0;
+    // bdcumilla=0;
+    bdcumillaextra=0;
     // cumillah=0;
 }
 void cumilla2(){
     cumilla1p=0;
     cumilla2p=1;
     cumilla3p=0;
-    bdcumilla=0;
+    bdcumillaextra=0;
     // cumillah=0;
 }
 void cumilla3(){
     cumilla1p=0;
     cumilla2p=0;
     cumilla3p=1;
-    bdcumilla=0;
+    bdcumillaextra=0;
     // cumillah=0;
 }
 void barishal1(){
     barishal1p=1;
     barishal2p=0;
-    bdbarishal=0;
+    // bdbarishal=0;
+    bdbarishalextra=0;
     // barishalh=0;
 }
 void barishal2(){
     barishal1p=0;
     barishal2p=1;
-    bdbarishal=0;
+    bdbarishalextra=0;
     // barishalh=0;
 }
 
@@ -2331,11 +2628,7 @@ void barishalhotel(){
 void ureview(){
     reviewbutton=0;
     ureviewbutton=1;
-}
-
-void takereview(){
-    reviewtake = 1;
-    reviewbutton = 0;
+    reviewtake=0;
 }
 
 void mapdhaka(){
@@ -2361,6 +2654,8 @@ void mapsylhet(){
     sylhet2p=0;
     sylhet3p=0;
     sylheth=0;
+    sylhetr=0;
+    bdshylhetextra=0;
     // sylhetm=0;
 }
 void mapkhulna(){
@@ -2370,6 +2665,8 @@ void mapkhulna(){
     khulna2p=0;
     khulna3p=0;
     khulnah=0;
+    khulnar=0;
+    bdkhulnaextra=0;
     // khulnam=0;
 }
 void maprajshahi(){
@@ -2379,8 +2676,9 @@ void maprajshahi(){
     rajshahi2p=0; 
     rajshahi3p=0;
     rajshahih=0;
+    rajshahir=0;
+    bdrajshahiextra=0;
     // rajshahim=0; 
-    // start=0;
 }
 void mapcumilla(){
     cumillam=1;
@@ -2389,6 +2687,8 @@ void mapcumilla(){
     cumilla2p=0;
     cumilla3p=0;
     cumillah=0;
+    cumillar=0;
+    bdcumillaextra=0;
     // cumillam=0;
 }
 void mapbarishal(){
@@ -2397,7 +2697,13 @@ void mapbarishal(){
     barishal1p=0;
     barishal2p=0;
     barishalh=0;
+    barishalr=0;
+    bdbarishalextra=0;
     // barishalm=0;
+}
+void signin(){
+    sign=1;
+    login=0;
 }
 
 
@@ -2503,31 +2809,31 @@ void drawbarishal2(){
 
 void drawdhakahotel(){
     iFilledRectangle(0,0,1136,592);
-    iShowBMP2(0,0,"photo\\dhakah.bmp",0);
+    iShowBMP2(0,0,"photo\\dhakahotel.bmp",0);
 }
 void drawctghotel(){
     iFilledRectangle(0,0,1136,592);
-    iShowBMP2(0,0,"photo\\ctgh.bmp",0);
+    iShowBMP2(0,0,"photo\\ctghotel.bmp",0);
 }
 void drawrajshahihotel(){
     iFilledRectangle(0,0,1136,592);
-    iShowBMP2(0,0,"photo\\rajshahih.bmp",0);
+    iShowBMP2(0,0,"photo\\rajshahihotel.bmp",0);
 }
 void drawsylhethotel(){
     iFilledRectangle(0,0,1136,592);
-    iShowBMP2(0,0,"photo\\sylheth.bmp",0);
+    iShowBMP2(0,0,"photo\\sylhethotel.bmp",0);
 }
 void drawkhulnahotel(){
     iFilledRectangle(0,0,1136,592);
-    iShowBMP2(0,0,"photo\\khulnah.bmp",0);
+    iShowBMP2(0,0,"photo\\khulnahotel.bmp",0);
 }
 void drawcumillahotel(){
     iFilledRectangle(0,0,1136,592);
-    iShowBMP2(0,0,"photo\\cumillah.bmp",0);
+    iShowBMP2(0,0,"photo\\cumillahotel.bmp",0);
 }
 void drawbarishalhotel(){
     iFilledRectangle(0,0,1136,592);
-    iShowBMP2(0,0,"photo\\barishalh.bmp",0);
+    iShowBMP2(0,0,"photo\\barishalhotel.bmp",0);
 }
 void drawreview(){
     iFilledRectangle(0,0,1136,592);
@@ -2537,18 +2843,15 @@ void drawreview(){
 void drawureview(){
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\Slide2.bmp",0);
-    iSetColor(255, 0, 0);
-    char reviewstr1[100][10000];
+    // iSetColor(255, 0, 0);
+    char reviewstr1[100][1000];
     files = fopen("text1.txt", "r");
     int control=0;
     if(files != NULL)
     {
         while (!feof(files))
         {
-            // printf("FIle open");
-            fgets(reviewstr1[control],2000, files);
-            // iText(109,445,reviewstr1[control],GLUT_BITMAP_TIMES_ROMAN_24);
-            // printf("%s", reviewstr1);
+            fgets(reviewstr1[control],200, files);
             control++;
         }
     }
@@ -2557,7 +2860,6 @@ void drawureview(){
     int xco=109,yco=445;
     for (int i = control-1; x<=5 ;i--)
     {
-        // printf("%s",reviewstr1[i]);
         iText(xco,yco,reviewstr1[i],GLUT_BITMAP_TIMES_ROMAN_24);
         yco-=30;
         x++;
@@ -2598,13 +2900,48 @@ void drawmapsylhet(){
     iShowBMP2(0,0,"photo\\sylhetmap.bmp",0); 
 }
 
-void change(){
-    index++;
+void drawdhakares(){
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\dhakares.bmp",0);
+}
+void drawctgres(){
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\ctgres.bmp",0);
+}
+void drawsylhetres(){
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\sylhetres.bmp",0);
+}
+void drawrajshahires(){
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\rajshahires.bmp",0);
+}
+void drawcumillares(){
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\cumillares.bmp",0);
+}
+void drawbarishalres(){
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\barishalres.bmp",0);
+}
+void drawkhulnares(){
+    iFilledRectangle(0,0,1136,592);
+    iShowBMP2(0,0,"photo\\khulnares.bmp",0);
 }
 
+void change(){
+    index++;
+    if (index==109)
+    {
+        start=0;
+        login=1;
+    }
+}
 int main()
 {
+    if(start == 1){
     iSetTimer(303,change);
+    }
     if(playmusic){
         PlaySound("photo\\x.wav", NULL, SND_ASYNC | SND_LOOP);
     }
