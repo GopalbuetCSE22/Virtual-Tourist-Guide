@@ -365,7 +365,7 @@ void iDraw()
     {
         iShowBMP2(0,0,photo[index],0);
         iSetColor(0,0,0);
-        iText(815,60,"Enter space to skip",GLUT_BITMAP_TIMES_ROMAN_24);
+        iText(200,60,"Enter space to skip",GLUT_BITMAP_TIMES_ROMAN_24);
     }
     
     if(sign==1){
@@ -379,27 +379,21 @@ void iDraw()
         iFilledRectangle(0, 0, 1136, 592);
         iShowBMP2(0, 0, "photo\\login.bmp", 0);
         index=0;
-        // iSetColor(255,255,255);
     }
     if(login==1){
-        // iSetColor(255,255,255);
         iText(680,266,str,GLUT_BITMAP_TIMES_ROMAN_24);
     }
     if(login == 1 ){ 
-        //&& logincontrol2==1
-        // iSetColor(255,255,255);
         iText(730,177,pass,GLUT_BITMAP_TIMES_ROMAN_24);
     }
-
+    
     if (homepage == 1)
     {
-    // fclose(file);
     iFilledRectangle(0, 0, 1136, 592);
     iShowBMP2(0, 0, "photo\\home.bmp", 0);
     }
     else if (tourist == 1)
     {
-        // drawtouristpage();
     iFilledRectangle(0, 0, 1136, 592);
     iShowBMP2(0, 0, "photo\\3.bmp", 0);
     iShowBMP2(900,30,"photo\\back1.bmp",0);
@@ -408,19 +402,16 @@ void iDraw()
     }
     else if (Settings == 1)
     {
-        // drawSettings();
     iFilledRectangle(0, 0, 1136, 592);
     iShowBMP2(0, 0, "photo\\settings.bmp", 0);
     }
     else if (about_us == 1)
     {
-        // drawabout_us();
     iFilledRectangle(0, 0, 1136, 592);
     iShowBMP2(0, 0, "photo\\aboutus.bmp", 0);
     iShowBMP2(900,30,"photo\\back1.bmp",0);
     }
     else if(inbd==1){
-        // drawinbd();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\inbd1.bmp",0);
     }
@@ -428,10 +419,8 @@ void iDraw()
     {
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\outbdpic.bmp",0);
-        // drawoutbd();
     }
     else if(bdDhaka==1){
-        // drawbddhaka();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\dhakanew.bmp",0);
     }
@@ -443,212 +432,171 @@ void iDraw()
     }
     
     else if(bdctg==1){
-        // drawbdctg();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\ctgextra.bmp",0);
     }
     else if(bdctgextra==1){
-        // drawbdctg();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\ctg.bmp",0);
     }
     else if(bdrajshahi==1){
-        // drawbdrajshahi();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\rajshahiextra.bmp",0);
     }
     else if(bdrajshahiextra==1){
-        // drawbdrajshahi();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\rajshahi.bmp",0);
     }
     else if(bdshylhet==1){
-        // drawbdshylhet();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\sylhetextra.bmp",0);
     }
     else if(bdshylhetextra==1){
-        // drawbdshylhet();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\sylhet.bmp",0);
     }
     else if(bdkhulna==1){
-        // drawbdkhulna();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\khulnaextra.bmp",0);
     }
     else if(bdkhulnaextra==1){
-        // drawbdkhulna();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\khulna.bmp",0);
     }
     else if(bdcumilla==1){
-        // drawbdcumilla();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\cumillaextra.bmp",0);
     }
     else if(bdcumillaextra==1){
-        // drawbdcumilla();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\cumilla.bmp",0);
     }
     else if(bdbarishal==1){
-        // drawbdbarishal();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\barishalextra.bmp",0);
     }
     else if(bdbarishalextra==1){
-        // drawbdbarishal();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\barishal.bmp",0);
     }
     else if(ctgran==1){
-        // drawrangamati();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\rangamati.bmp",0);
     }
     else if(ctgban==1){
-        // drawbandarban();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\badarban.bmp",0);
     }
     else if(ctgcox==1){
-        // drawcoxbazar();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\Coxs.bmp",0);
     }
     else if(ctgsajek==1){
-        // drawsajek();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\Sajek.bmp",0);
     }
     else if(dhakaaha==1){
-        // drawahsan();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\ahasan manjil.bmp",0);
     }
     else if(dhakalal==1){
-        // drawlalbagh();
         iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\lalbag fort.bmp",0);
     }
     else if(dhakasona==1){
-        // drawsonargaon();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\sonargaon.bmp",0);
     }
     else if(europee==1){
-        // draweurope();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\europe.bmp",0);
     }
     else if(usaa==1){
-        // drawusa();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\usapage.bmp",0);
     }
     else if(russiaa==1){
-        // drawrussia();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\russiapage.bmp",0);
     }
     else if(francea==1){
-        // drawfrance();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\francepage.bmp",0);
     }
     else if(australiaa==1){
-        // drawaustralia();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\australiapage.bmp",0);
     }
     else if(usah==1){
-        // drawusahotel();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\usahotel.bmp",0);
     }
     else if(russiah==1){
-        // drawrussiahotel();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\russiahotel.bmp",0); 
     }
     else if(franceh==1){
-        // drawfrancehotel();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\francehotel.bmp",0);
     }
     else if(aush==1){
-        // drawaushotel();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\australahotel.bmp",0);
     }
     else if(usa1p == 1){
-        // drawusa1();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\usa1.bmp",0);
     }
     else if(usa2p == 1){
-        // drawusa2();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\usa2.bmp",0);
     }
     else if(usa3p == 1){
-        // drawusa3();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\usa3.bmp",0);
     }
     else if(usa4p == 1){
-        // drawusa4();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\usa4.bmp",0);
     }
     else if(russia1p == 1){
-        // drawrussia1();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\russia1.bmp",0);
     }
     else if(russia2p == 1){
-        // drawrussia2();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\russia2.bmp",0);
     }
     else if(russia3p == 1){
-        // drawrussia3();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\russia3.bmp",0);
     }
     else if(russia4p == 1){
-        // drawrussia4();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\russia4.bmp",0);
     }
     if (france1p == 1)
     {
-        // drawfrance1();
         iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\france1.bmp",0);
     }
     if (france2p == 1)
     {
-        // drawfrance2();
         iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\france2.bmp",0);
     }
     if (france3p == 1)
     {
-        // drawfrance3();
         iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\france3.bmp",0);
     }
     if (france4p == 1)
     {
-        // drawfrance4();
         iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\france4.bmp",0);
     }
     if (aus1p ==1 )
     {
-        // drawaus1();
     iFilledRectangle(0,0,1136,592);
     iShowBMP2(0,0,"photo\\aus1.bmp",0);
     }
